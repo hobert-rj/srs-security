@@ -63,7 +63,9 @@ jobs:
 
       - name: Delete existing 'latest' release (if any)
         run: |
-          gh release view latest > /dev/null 2>&1 && gh release delete latest --yes
+          if gh release view latest > /dev/null 2>&1; then
+            gh release delete latest --yes
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
